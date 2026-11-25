@@ -186,6 +186,9 @@ p{margin:0}
 .cards{display:grid;gap:8px}
 .cards.c3{grid-template-columns:repeat(3,1fr);padding-inline:8%}
 .cards.c4{grid-template-columns:repeat(4,1fr)}
+.cards.c5{grid-template-columns:repeat(5,1fr);gap:6px}
+.cards.c6{grid-template-columns:repeat(6,1fr);gap:5px}
+.cards.c5 .fc,.cards.c6 .fc{font-size:clamp(1.1rem,6vw,1.7rem)}
 .cardx{aspect-ratio:3/4;perspective:700px;max-width:100%}
 .cards.sq .cardx{aspect-ratio:1/1}
 .cardx .in{position:relative;display:block;width:100%;height:100%;transition:transform .35s ease;transform-style:preserve-3d;-webkit-transform-style:preserve-3d}
@@ -326,12 +329,12 @@ function checkBadges() { const got = []; for (const b of BADGES) if (!S.badges[b
 
 /* ---------- Inhalte ---------- */
 const MIXED = ['🍎', '🐶', '🌻', '🚗', '⚽', '🎈', '🐟', '🍰', '🏠', '🌙', '🎁', '🦋'];
-const FRUITS = ['🍎', '🍏', '🍐', '🍊', '🍋', '🍑', '🍒', '🍓', '🍇', '🍉', '🍌', '🥝'];
-const ANIMALS = ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼', '🐨', '🐯', '🦁', '🐮'];
+const FRUITS = ['🍎', '🍏', '🍐', '🍊', '🍋', '🍑', '🍒', '🍓', '🍇', '🍉', '🍌', '🥝', '🍈', '🍍', '🥭', '🥥', '🍅', '🫐'];
+const ANIMALS = ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼', '🐨', '🐯', '🦁', '🐮', '🐷', '🐸', '🐵', '🐔', '🐧', '🐴'];
 const COLORS = [
   { id: 'rot', n: 'ROT', l: 'Rot', c: '#D9343B' }, { id: 'blau', n: 'BLAU', l: 'Blau', c: '#2563EB' },
   { id: 'gruen', n: 'GRÜN', l: 'Grün', c: '#15935A' }, { id: 'gelb', n: 'GELB', l: 'Gelb', c: '#E0A100' },
-  { id: 'lila', n: 'LILA', l: 'Lila', c: '#8B45E0' },
+  { id: 'lila', n: 'LILA', l: 'Lila', c: '#8B45E0' }, { id: 'schwarz', n: 'SCHWARZ', l: 'Schwarz', c: '#1F2937' },
 ];
 const WORDS = {
   4: [['HAUS', 'Wohnen'], ['BAUM', 'Natur'], ['HUND', 'Tier'], ['BROT', 'Essen'], ['MOND', 'Himmel'], ['ROSE', 'Blume'], ['BALL', 'Spiel'], ['TOPF', 'Küche'], ['SOFA', 'Wohnzimmer'], ['NASE', 'Gesicht'], ['BUCH', 'Lesen'], ['ENTE', 'Tier'], ['SAFT', 'Getränk'], ['HAND', 'Körper']],
@@ -339,12 +342,14 @@ const WORDS = {
   6: [['GARTEN', 'Draußen'], ['ZUCKER', 'Backen'], ['KUCHEN', 'Kaffeetisch'], ['TELLER', 'Küche'], ['KOFFER', 'Reise'], ['SCHULE', 'Lernen'], ['KIRCHE', 'Gebäude'], ['BUTTER', 'Frühstück'], ['TOMATE', 'Gemüse'], ['SOMMER', 'Jahreszeit'], ['WINTER', 'Jahreszeit'], ['KISSEN', 'Schlafen'], ['BANANE', 'Obst']],
   7: [['FENSTER', 'Haus'], ['SPIEGEL', 'Badezimmer'], ['FAHRRAD', 'Fahrzeug'], ['ZEITUNG', 'Lesen'], ['SCHRANK', 'Möbel'], ['TEPPICH', 'Boden'], ['GITARRE', 'Instrument'], ['ELEFANT', 'Tier'], ['PINGUIN', 'Tier'], ['KONZERT', 'Ausflug'], ['STRASSE', 'Draußen']],
   8: [['ERDBEERE', 'Obst'], ['FRÜHLING', 'Jahreszeit'], ['KALENDER', 'Zeit'], ['HANDTUCH', 'Badezimmer'], ['SCHÜSSEL', 'Küche'], ['FLUGZEUG', 'Reise'], ['KAROTTEN', 'Gemüse'], ['HAUSTIER', 'Zuhause']],
-  10: [['KARTOFFEL', 'Gemüse'], ['SCHOKOLADE', 'Süßes'], ['GEBURTSTAG', 'Feier'], ['REGENBOGEN', 'Himmel'], ['SONNENBLUME', 'Garten'], ['KÜHLSCHRANK', 'Küche'], ['BRIEFMARKE', 'Post'], ['WEIHNACHTEN', 'Fest'], ['ZAHNBÜRSTE', 'Badezimmer'], ['SPAZIERGANG', 'Draußen']],
+  10: [['KARTOFFEL', 'Gemüse'], ['SCHOKOLADE', 'Süßes'], ['GEBURTSTAG', 'Feier'], ['REGENBOGEN', 'Himmel'], ['SONNENBLUME', 'Garten'], ['KÜHLSCHRANK', 'Küche'], ['BRIEFMARKE', 'Post'], ['WEIHNACHTEN', 'Fest'], ['ZAHNBÜRSTE', 'Badezimmer'], ['SPAZIERGANG', 'Draußen'], ['REGENSCHIRM', 'Wetter'], ['BRIEFTRÄGER', 'Beruf']],
+  12: [['SCHMETTERLING', 'Tier'], ['STRASSENBAHN', 'Verkehr'], ['KÜCHENSCHRANK', 'Möbel'], ['BLUMENSTRAUSS', 'Geschenk'], ['WASCHMASCHINE', 'Haushalt'], ['TELEFONNUMMER', 'Kontakt'], ['ERDBEERKUCHEN', 'Kaffeetisch'], ['KINDERGARTEN', 'Kinder'], ['GARTENSCHERE', 'Werkzeug'], ['APFELSTRUDEL', 'Nachtisch']],
+  14: [['KAFFEEMASCHINE', 'Küche'], ['MARMELADENGLAS', 'Frühstück'], ['WEIHNACHTSBAUM', 'Fest'], ['SONNENUNTERGANG', 'Abend'], ['FERNSEHPROGRAMM', 'Wohnzimmer'], ['GEBURTSTAGSKUCHEN', 'Feier'], ['KARTOFFELSALAT', 'Grillfest'], ['BLUMENGIESSKANNE', 'Garten'], ['ZITRONENKUCHEN', 'Backen']],
 };
 const ODD = {
   easy: [['🍎', '🍌'], ['🐶', '🐱'], ['⭐', '🌙'], ['🚗', '🚲'], ['🌻', '🌵'], ['🎈', '🎁']],
   mid: [['🍎', '🍅'], ['🐻', '🐨'], ['🌸', '🌺'], ['🍊', '🍑'], ['🐢', '🐊'], ['⚽', '🏀']],
-  hard: [['😀', '😃'], ['🕐', '🕑'], ['🙂', '😊'], ['😐', '😑'], ['🌕', '🌖'], ['💙', '💜']],
+  hard: [['😀', '😃'], ['🕐', '🕑'], ['🙂', '😊'], ['😐', '😑'], ['🌕', '🌖'], ['💙', '💜'], ['😗', '😙'], ['🕗', '🕘'], ['😌', '😔'], ['🐁', '🐀']],
 };
 
 /* ---------- Kleine Bausteine für Spiele ---------- */
@@ -355,23 +360,27 @@ function mathTask(s) {
   let a, b, c;
   const add = (x, y) => ({ q: `${x} + ${y}`, a: x + y });
   const sub = (x, y) => ({ q: `${x} − ${y}`, a: x - y });
-  const coin = () => Math.random() < .5;
+  const mul = (x, y) => ({ q: `${x} × ${y}`, a: x * y });
+  const div = (x, y) => ({ q: `${x * y} ÷ ${x}`, a: y });
+  const sq = x => ({ q: `${x}²`, a: x * x });
+  const pct = ps => { const p = pick(ps), base = ri(3, 45) * 20; return { q: `${p} % von ${base}`, a: base * p / 100 }; };
+  const mulAdd = (lo, hi) => { a = ri(lo, hi); b = ri(lo, hi); c = ri(5, 49); return { q: `${a} × ${b} + ${c}`, a: a * b + c }; };
+  const mulSub = (lo, hi) => { a = ri(lo, hi); b = ri(lo, hi); c = ri(3, a * b - 1); return { q: `${a} × ${b} − ${c}`, a: a * b - c }; };
+  const either = (...fs) => pick(fs)();
   switch (s) {
-    case 1: return add(ri(1, 5), ri(1, 5));
-    case 2: a = ri(2, 12); return add(a, ri(2, 20 - a));
-    case 3: if (coin()) { a = ri(2, 12); return add(a, ri(2, 20 - a)); } a = ri(6, 20); return sub(a, ri(1, a - 1));
-    case 4: if (coin()) { a = ri(10, 35); return add(a, ri(5, 50 - a)); } a = ri(15, 50); return sub(a, ri(3, a - 5));
-    case 5: a = ri(2, 5); b = ri(2, 10); return { q: `${a} × ${b}`, a: a * b };
-    case 6: if (coin()) { a = ri(20, 70); return add(a, ri(10, 100 - a)); } a = ri(30, 100); return sub(a, ri(10, a - 10));
-    case 7: a = ri(3, 10); b = ri(3, 10); return { q: `${a} × ${b}`, a: a * b };
-    case 8: b = ri(2, 9); c = ri(2, 10); return { q: `${b * c} ÷ ${b}`, a: c };
-    case 9: a = ri(10, 40); b = ri(5, 30); c = ri(3, a + b - 2); return { q: `${a} + ${b} − ${c}`, a: a + b - c };
-    default: {
-      const k = ri(0, 2);
-      if (k === 0) { a = ri(3, 9); b = ri(3, 9); c = ri(2, 20); return { q: `${a} × ${b} + ${c}`, a: a * b + c }; }
-      if (k === 1) { b = ri(3, 9); c = ri(3, 12); a = ri(5, 30); return { q: `${b * c} ÷ ${b} + ${a}`, a: c + a }; }
-      a = ri(50, 150); b = ri(20, 90); return coin() ? add(a, b) : sub(a + b, ri(15, a));
-    }
+    case 1: return either(() => add(ri(3, 12), ri(3, 9)), () => sub(ri(11, 20), ri(2, 9)));
+    case 2: return either(() => add(ri(12, 45), ri(8, 50)), () => sub(ri(30, 95), ri(7, 29)));
+    case 3: return either(() => add(ri(25, 75), ri(15, 75)), () => sub(ri(60, 150), ri(17, 59)), () => mul(ri(2, 6), ri(3, 10)));
+    case 4: return either(() => mul(ri(3, 10), ri(3, 10)), () => div(ri(3, 9), ri(3, 10)), () => add(ri(80, 250), ri(45, 199)));
+    case 5: return either(() => mul(ri(6, 12), ri(6, 12)), () => div(ri(6, 12), ri(4, 12)), () => sub(ri(200, 500), ri(65, 199)));
+    case 6: return either(() => mulAdd(4, 9), () => mulSub(4, 9), () => mul(ri(11, 19), ri(3, 7)), () => pct([10, 50]));
+    case 7: return either(() => mul(ri(12, 29), ri(3, 9)), () => add(ri(250, 700), ri(150, 699)), () => sub(ri(500, 999), ri(150, 499)), () => pct([10, 20, 25, 50]));
+    case 8: return either(() => mul(ri(11, 19), ri(11, 19)), () => mulSub(6, 12), () => div(ri(6, 12), ri(11, 25)), () => pct([20, 25, 75]), () => sq(ri(11, 15)));
+    case 9: return either(() => mul(ri(13, 29), ri(12, 19)), () => sq(ri(13, 20)), () => pct([15, 30, 75]), () => sub(ri(1000, 3000), ri(250, 999)),
+      () => { a = ri(3, 9); b = ri(3, 9); c = ri(3, 9); const d = ri(3, 9); return { q: `${a} × ${b} + ${c} × ${d}`, a: a * b + c * d }; });
+    default: return either(() => mul(ri(21, 49), ri(13, 29)), () => sq(ri(15, 30)), () => pct([35, 45, 60, 85]),
+      () => { a = ri(10, 40); b = ri(10, 40); c = ri(3, 9); return { q: `(${a} + ${b}) × ${c}`, a: (a + b) * c }; },
+      () => { a = ri(3, 9); b = ri(4, 12); c = ri(3, 9); return { q: `${a * b} ÷ ${a} × ${c}`, a: b * c }; });
   }
 }
 function distractors(ans) {
@@ -388,7 +397,7 @@ const GAMES = [
     how: 'Rechne die Aufgabe im Kopf und tippe auf das richtige Ergebnis. Wer schnell ist, bekommt Blitzbonus-Punkte.',
     art: '<span class="art-math">7<em>+</em>5</span>',
     start(ctx) {
-      const total = 8, tl = ctx.stufe <= 3 ? 10000 : ctx.stufe <= 6 ? 8000 : 6000; let i = 0;
+      const total = 8, tl = ctx.stufe <= 3 ? 6000 : ctx.stufe <= 6 ? 9000 : 12000; let i = 0;
       const next = () => {
         if (i >= total) return ctx.finish();
         const t = mathTask(ctx.stufe), opts = shuffle([t.a, ...distractors(t.a)]);
@@ -412,13 +421,13 @@ const GAMES = [
   },
   {
     id: 'paare', name: 'Paare finden', trains: 'Bildgedächtnis',
-    how: 'Decke immer zwei Karten auf. Merk dir, wo welches Bild liegt, und finde alle Paare. Am Anfang darfst du kurz spicken.',
+    how: 'Decke immer zwei Karten auf. Merk dir, wo welches Bild liegt, und finde alle Paare. Nur in Stufe 1 und 2 darfst du kurz spicken, später gibt es bis zu 36 Karten.',
     art: '<span class="art-cards"><i></i><i class="up">♥</i></span>',
     start(ctx) {
-      const s = ctx.stufe, pairs = [3, 4, 6, 6, 8, 8, 10, 10, 12, 12][s - 1];
-      const set = s >= 6 ? pick([FRUITS, ANIMALS]) : MIXED;
+      const s = ctx.stufe, pairs = [4, 6, 8, 10, 12, 12, 15, 15, 18, 18][s - 1];
+      const set = s >= 5 ? pick([FRUITS, ANIMALS]) : MIXED;
       const syms = shuffle(set.slice()).slice(0, pairs), deck = shuffle([...syms, ...syms]);
-      const cols = deck.length <= 6 ? 3 : 4, peek = [3000, 2500, 2200, 1800, 1400, 0, 0, 0, 0, 0][s - 1];
+      const n = deck.length, cols = n <= 24 ? 4 : n <= 30 ? 5 : 6, peek = [2000, 1200, 0, 0, 0, 0, 0, 0, 0, 0][s - 1];
       ctx.stage.innerHTML = `<p class="ask" id="pask">${peek ? 'Schau genau hin …' : 'Finde alle Paare'}</p>
         <div class="cards c${cols} ${deck.length > 16 ? 'sq' : ''}">${deck.map((e, k) => `<button class="cardx" data-k="${k}" aria-label="Karte ${k + 1}"><span class="in"><span class="bk"></span><span class="fc">${e}</span></span></button>`).join('')}</div>
         <p class="sub" id="pstat">0 von ${pairs} Paaren</p>`;
@@ -450,23 +459,39 @@ const GAMES = [
   },
   {
     id: 'zahlen', name: 'Zahlen merken', trains: 'Kurzzeitgedächtnis',
-    how: 'Eine Zahl erscheint für ein paar Sekunden. Merk sie dir gut und tippe sie danach wieder ein.',
+    how: 'Eine Zahl erscheint kurz. Merk sie dir und tippe sie danach ein. Ab Stufe 4 manchmal rückwärts, ab Stufe 8 erscheinen die Ziffern einzeln nacheinander.',
     art: '<span class="art-digits"><b>4</b><b>9</b><b>2</b></span>',
     start(ctx) {
-      const s = ctx.stufe, len = [3, 3, 4, 4, 5, 5, 6, 6, 7, 8][s - 1], total = 5;
-      const ms = len * (s <= 4 ? 850 : s <= 7 ? 700 : 600) + 700; let i = 0;
+      const s = ctx.stufe, len = [4, 5, 5, 6, 6, 7, 7, 8, 8, 9][s - 1], total = 5;
+      const per = s <= 3 ? 750 : s <= 6 ? 600 : 480, seq = s >= 8, revP = s >= 6 ? .5 : s >= 4 ? .3 : 0; let i = 0;
       const next = () => {
         if (i >= total) return ctx.finish();
         let num = ''; for (let k = 0; k < len; k++) num += ri(0, 9);
-        ctx.stage.innerHTML = `<p class="ask">Merk dir diese Zahl</p>
-          <div class="memo">${[...num].map((d, k) => `<b style="animation-delay:${k * 70}ms">${d}</b>`).join('')}</div>
-          <div class="shrink"><i></i></div>`;
-        runBar($('.shrink i', ctx.stage), ms);
-        ctx.later(() => ask(num), ms);
+        const rev = Math.random() < revP;
+        const head = rev ? '<p class="ask alt">Merk dir die Zahl. Danach <b>rückwärts</b> eintippen!</p>' : '<p class="ask">Merk dir diese Zahl</p>';
+        if (seq) {
+          ctx.stage.innerHTML = `${head}<div class="memo"><b id="one" style="width:96px;height:120px;font-size:4rem"></b></div><p class="sub" id="cnt"></p>`;
+          const one = $('#one', ctx.stage); let k = 0;
+          const tick = () => {
+            if (k >= len) return ctx.later(() => ask(num, rev), 300);
+            one.textContent = num[k]; one.style.animation = 'none'; void one.offsetWidth; one.style.animation = '';
+            $('#cnt', ctx.stage).textContent = `Ziffer ${k + 1} von ${len}`; k++;
+            ctx.later(() => { one.textContent = ''; ctx.later(tick, 160); }, per);
+          };
+          ctx.later(tick, 600);
+        } else {
+          const ms = len * per + 500;
+          ctx.stage.innerHTML = `${head}
+            <div class="memo">${[...num].map((d, k) => `<b style="animation-delay:${k * 70}ms">${d}</b>`).join('')}</div>
+            <div class="shrink"><i></i></div>`;
+          runBar($('.shrink i', ctx.stage), ms);
+          ctx.later(() => ask(num, rev), ms);
+        }
       };
-      const ask = num => {
+      const ask = (shown, rev) => {
+        const num = rev ? [...shown].reverse().join('') : shown;
         let typed = '', done = false;
-        ctx.stage.innerHTML = `<p class="ask">Wie lautete die Zahl?</p>
+        ctx.stage.innerHTML = `${rev ? '<p class="ask alt">Jetzt <b>rückwärts</b> eintippen</p>' : '<p class="ask">Wie lautete die Zahl?</p>'}
           <div class="slots">${[...num].map(() => '<span class="slot"></span>').join('')}</div>
           <p class="solution" id="sol"></p>
           <div class="pad">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => `<button data-d="${n}">${n}</button>`).join('')}<button class="del" data-d="del" aria-label="Letzte Ziffer löschen">⌫</button><button data-d="0">0</button><span></span></div>`;
@@ -493,21 +518,28 @@ const GAMES = [
   },
   {
     id: 'farbe', name: 'Farbe & Wort', trains: 'Aufmerksamkeit',
-    how: 'Ein Farbwort erscheint in einer Farbe. Tippe auf die Farbe der Schrift, nicht auf das, was da steht. Ab Stufe 8 wechselt manchmal die Frage, also gut lesen!',
+    how: 'Ein Farbwort erscheint in einer Farbe. Tippe auf die Farbe der Schrift, nicht auf das, was da steht. Ab Stufe 3 wechselt manchmal die Frage, ab Stufe 5 läuft die Zeit ab und ab Stufe 7 tauschen die Farbknöpfe ihre Plätze.',
     art: '<span class="art-stroop">ROT</span>',
     start(ctx) {
-      const s = ctx.stufe, nc = s <= 2 ? 3 : s <= 6 ? 4 : 5, incP = [0, .3, .5, .6, .7, .8, .8, .9, .9, 1][s - 1];
-      const sw = s >= 8 ? .35 : 0, total = 10, tl = s <= 3 ? 6000 : s <= 6 ? 4500 : 3500, cols = COLORS.slice(0, nc); let i = 0;
+      const s = ctx.stufe, nc = s <= 2 ? 4 : s <= 6 ? 5 : 6, incP = [.5, .7, .8, .9, .9, 1, 1, 1, 1, 1][s - 1];
+      const sw = [0, 0, .25, .3, .35, .4, .4, .45, .5, .5][s - 1], total = 12, tl = s <= 2 ? 5000 : s <= 5 ? 3500 : s <= 8 ? 2600 : 2000;
+      const strict = s >= 5, mix = s >= 7, cols = COLORS.slice(0, nc); let i = 0;
       const next = () => {
         if (i >= total) return ctx.finish();
         const word = pick(cols), ink = Math.random() < incP ? pick(cols.filter(c => c !== word)) : word;
         const askWord = Math.random() < sw, ans = askWord ? word.id : ink.id;
+        const order = mix ? shuffle(cols.slice()) : cols;
         ctx.stage.innerHTML = `<p class="ask ${askWord ? 'alt' : ''}">${askWord ? 'Welches <b>Wort</b> steht da?' : 'Welche <b>Farbe</b> hat die Schrift?'}</p>
           <div class="stroop" style="color:${ink.c}">${word.n}</div>
-          <div class="bonus"><i></i></div><p class="bonus-l">Blitzbonus</p>
-          <div class="swatches n${nc}">${cols.map(c => `<button class="sw" data-id="${c.id}"><i style="background:${c.c}"></i><span>${c.l}</span></button>`).join('')}</div>`;
+          <div class="bonus"><i></i></div><p class="bonus-l">${strict ? 'Zeit läuft' : 'Blitzbonus'}</p>
+          <div class="swatches n${nc}">${order.map(c => `<button class="sw" data-id="${c.id}"><i style="background:${c.c}"></i><span>${c.l}</span></button>`).join('')}</div>`;
         const bar = $('.bonus i', ctx.stage); runBar(bar, tl);
         const t0 = performance.now(); let done = false;
+        if (strict) ctx.later(() => {
+          if (done) return; done = true;
+          $(`[data-id="${ans}"]`, ctx.stage).classList.add('ok'); $('.bonus-l', ctx.stage).textContent = 'Zu langsam!';
+          ctx.bad(); i++; ctx.progress(i, total); ctx.later(next, 1400);
+        }, tl);
         $$('.sw', ctx.stage).forEach(b => b.onclick = () => {
           if (done) return; done = true; freezeBar(bar);
           const ok = b.dataset.id === ans;
@@ -521,10 +553,10 @@ const GAMES = [
   },
   {
     id: 'wort', name: 'Wortsalat', trains: 'Sprache und Wortschatz',
-    how: 'Die Buchstaben eines Wortes sind durcheinander. Tippe sie in der richtigen Reihenfolge an. Vertippt? Tippe oben auf einen Buchstaben, um ihn zurückzulegen.',
+    how: 'Die Buchstaben eines Wortes sind durcheinander. Tippe sie in der richtigen Reihenfolge an. Vertippt? Tippe oben auf einen Buchstaben, um ihn zurückzulegen. Ab Stufe 4 gibt es den Tipp nur auf Knopfdruck, ab Stufe 8 hast du nur einen Versuch.',
     art: '<span class="art-tiles"><b>W</b><b>O</b><b>R</b><b>T</b></span>',
     start(ctx) {
-      const s = ctx.stufe, key = [4, 4, 5, 5, 6, 6, 7, 7, 8, 10][s - 1], total = 5;
+      const s = ctx.stufe, key = [5, 6, 7, 8, 10, 10, 12, 12, 14, 14][s - 1], total = 5, oneTry = s >= 8;
       const list = shuffle(WORDS[key].slice()).slice(0, total); let i = 0;
       const next = () => {
         if (i >= total) return ctx.finish();
@@ -532,7 +564,7 @@ const GAMES = [
         let order = shuffle(L.map((_, k) => k)); let tries = 0;
         while (order.map(k => L[k]).join('') === word && tries++ < 20) order = shuffle(order);
         let picked = [], attempt = 0, done = false;
-        const showHint = s <= 6;
+        const showHint = s <= 3;
         ctx.stage.innerHTML = `<p class="ask">Welches Wort ist das?</p>
           ${showHint ? `<span class="hintchip">Tipp: ${hint}</span>` : ''}
           <div class="slots" id="ws">${L.map((_, k) => `<button class="slot" data-s="${k}" aria-label="Feld ${k + 1}"></button>`).join('')}</div>
@@ -548,7 +580,7 @@ const GAMES = [
         const check = () => {
           const guess = picked.map(k => L[k]).join('');
           if (guess === word) { done = true; $('#ws').classList.add('good'); $('#wmsg').textContent = pick(['Prima!', 'Genau!', 'Richtig!', 'Super!']); ctx.good(attempt === 0 ? 5 : 0); i++; ctx.progress(i, total); ctx.later(next, 1100); }
-          else if (attempt === 0) {
+          else if (attempt === 0 && !oneTry) {
             attempt = 1; done = true; const ws = $('#ws'); ws.classList.add('badx'); $('#wmsg').textContent = 'Fast! Noch ein Versuch.';
             ctx.later(() => { ws.classList.remove('badx'); picked = []; draw(); done = false; }, 900);
           } else { done = true; ctx.bad(); reveal(); $('#wmsg').textContent = 'So heißt das Wort.'; i++; ctx.progress(i, total); ctx.later(next, 2000); }
@@ -563,11 +595,11 @@ const GAMES = [
   },
   {
     id: 'finde', name: 'Finde den Unterschied', trains: 'Wahrnehmung und Tempo',
-    how: 'Alle Bilder sehen gleich aus, bis auf eins. Finde das eine andere Bild so schnell du kannst.',
+    how: 'Alle Bilder sehen gleich aus, bis auf eins. Finde das eine andere Bild so schnell du kannst. Ab Stufe 7 läuft die Zeit ab.',
     art: '<span class="art-dots"><i></i><i></i><i></i><i></i><i></i><i class="odd"></i><i></i><i></i><i></i></span>',
     start(ctx) {
-      const s = ctx.stufe, n = [3, 3, 4, 4, 5, 5, 5, 6, 6, 6][s - 1], lvl = s <= 3 ? 'easy' : s <= 6 ? 'mid' : 'hard';
-      const total = 8, fast = s <= 4 ? 4000 : 3000; let i = 0;
+      const s = ctx.stufe, n = [4, 5, 5, 6, 6, 7, 7, 8, 8, 8][s - 1], lvl = s <= 2 ? 'easy' : s <= 4 ? 'mid' : 'hard';
+      const total = 8, fast = s <= 3 ? 3500 : 2500, limit = s >= 9 ? 5000 : s >= 7 ? 7000 : 0; let i = 0;
       const next = () => {
         if (i >= total) return ctx.finish();
         let [a, b] = pick(ODD[lvl]); if (Math.random() < .5) [a, b] = [b, a];
@@ -575,6 +607,11 @@ const GAMES = [
         ctx.stage.innerHTML = `<p class="ask">Welches Bild ist anders?</p>
           <div class="fgrid" style="grid-template-columns:repeat(${n},1fr)">${Array.from({ length: n * n }, (_, k) => `<button class="fcell" data-c="${k}" style="font-size:${fs}">${k === target ? b : a}</button>`).join('')}</div>`;
         const t0 = performance.now(); let done = false;
+        if (limit) ctx.later(() => {
+          if (done) return; done = true;
+          $(`[data-c="${target}"]`, ctx.stage).classList.add('ok'); $('.ask', ctx.stage).textContent = 'Zu langsam! Hier war es.';
+          ctx.bad(); i++; ctx.progress(i, total); ctx.later(next, 1600);
+        }, limit);
         $$('.fcell', ctx.stage).forEach(c => c.onclick = () => {
           if (done) return; done = true;
           const ok = +c.dataset.c === target;
@@ -665,7 +702,7 @@ function renderGame(id) {
         <b>${lock ? '🔒' : n}</b><span class="st">${lock ? '' : [1, 2, 3].map(j => j <= stars ? '<i>★</i>' : '★').join('')}</span></button>`;
     }).join('')}</div>
     <button class="cta" data-stufe="${st.unlocked}">Stufe ${st.unlocked} spielen</button>
-    <p class="hint">Mit mindestens 1 Stern schaltest du die nächste Stufe frei. Schaffst du überall 3 Sterne?</p>
+    <p class="hint">Mit 1 Stern schaltest du die nächste Stufe frei. Mit 3 Sternen springst du gleich eine Stufe weiter.</p>
   `);
 }
 
@@ -733,8 +770,11 @@ function endRound(R, ratio, summary) {
   const stars = ratio >= .95 ? 3 : ratio >= .75 ? 2 : ratio >= .5 ? 1 : 0;
   const st = gs(R.id), prev = st.stars[R.stufe] || 0;
   st.stars[R.stufe] = Math.max(prev, stars);
-  let unlocked = false;
-  if (stars >= 1 && R.stufe === st.unlocked && st.unlocked < 10) { st.unlocked++; unlocked = true; }
+  let unlocked = false, jump = false;
+  if (stars >= 1 && R.stufe === st.unlocked && st.unlocked < 10) {
+    jump = stars === 3 && st.unlocked <= 8;
+    st.unlocked += jump ? 2 : 1; unlocked = true;
+  }
   st.last = Date.now(); st.played = (st.played || 0) + 1;
   const bonus = stars * 15 + (stars === 3 ? 15 : 0), gained = R.xp + bonus;
   const before = levelInfo(S.xp).L;
@@ -750,7 +790,7 @@ function endRound(R, ratio, summary) {
   const newBadges = checkBadges();
   save();
 
-  const x = G[R.id], canNext = R.stufe < st.unlocked && R.stufe < 10, t = todayState();
+  const x = G[R.id], nextN = jump ? R.stufe + 2 : R.stufe + 1, canNext = nextN <= st.unlocked && R.stufe < 10, t = todayState();
   const line = summary || `${R.correct} von ${R.correct + R.wrong} richtig`;
   view = { name: 'result', id: R.id, stufe: R.stufe };
   show(`<section class="result" style="${gameVars(R.id)}">
@@ -758,10 +798,10 @@ function endRound(R, ratio, summary) {
       <h1>${pick(HEAD[stars])}</h1>
       <p class="line">${x.name}, Stufe ${R.stufe} · ${line}${R.maxCombo >= 3 ? ` · längste Serie ${R.maxCombo}` : ''}</p>
       <div class="gain">+${gained} Punkte</div>
-      ${unlocked ? `<div class="unlock">Stufe ${R.stufe + 1} ist jetzt freigeschaltet!</div>` : ''}
+      ${unlocked ? `<div class="unlock">${jump ? `Stufensprung! Mit 3 Sternen geht es direkt zu Stufe ${nextN}.` : `Stufe ${nextN} ist jetzt freigeschaltet!`}</div>` : ''}
       ${stars === 0 ? '<p class="line">Für einen Stern brauchst du mindestens die Hälfte richtig.</p>' : ''}
       <div class="btns">
-        ${canNext ? `<button class="cta" data-act="go" data-id="${R.id}" data-n="${R.stufe + 1}">Weiter zu Stufe ${R.stufe + 1}</button>` : ''}
+        ${canNext ? `<button class="cta" data-act="go" data-id="${R.id}" data-n="${nextN}">Weiter zu Stufe ${nextN}</button>` : ''}
         <button class="cta ${canNext ? 'alt' : ''}" data-act="go" data-id="${R.id}" data-n="${R.stufe}">${stars === 3 ? 'Nochmal spielen' : 'Nochmal versuchen'}</button>
         ${t.rounds < 3 ? `<button class="cta alt" data-act="daily-next">Anderes Spiel (Tagesziel ${t.rounds}/3)</button>` : ''}
         <button class="textbtn" data-act="home">Zur Übersicht</button>
